@@ -53,7 +53,7 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="postcss">
+<style>
 .alert {
   @apply block shadow-md rounded px-3 py-2 transition-all mt-2 bg-gray-100 text-gray-800;
 }

@@ -1,9 +1,11 @@
 <template>
-    <div class="header">
-        <Nav :user="user" @signOut="handleSignOut" />
-    </div>
-    <div class="container mx-auto">
-        <slot />
+    <div>
+        <div class="header">
+            <Nav :user="user" @signOut="handleSignOut" />
+        </div>
+        <div class="container mx-auto">
+            <slot />
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -45,3 +47,9 @@
         if(subscription.value) subscription.value?.data?.unsubscribe()
     })
 </script>
+
+<style>
+    .header {
+        @apply w-screen bg-black
+    }
+</style>

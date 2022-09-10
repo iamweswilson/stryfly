@@ -1,7 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col justify-center">
       <Sep size="lg"/>
-      <StarterKit/>
       <p class="text-center">Pre-made components like alert/toast, button, separator, modal/dialog, spinner, etc. </p>
       <ComponentExample heading="spinner">
             <Spinner size="lg" />

@@ -19,7 +19,7 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="postcss">
+<style>
 .alert__list {
   @apply absolute w-screen top-6 flex flex-col place-items-center justify-center z-10;
 }

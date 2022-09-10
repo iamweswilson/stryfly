@@ -1,6 +1,13 @@
 <template>
-    <div class="container mx-auto">
-        <slot />
+    <div class="default-layout">
+        <div class="header">
+            <Nav />
+        </div>
+        <main>
+            <div class="container mx-auto">
+                <slot />
+            </div>
+        </main>
     </div>
 </template>
 <script lang="ts" setup>

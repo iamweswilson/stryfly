@@ -1,5 +1,5 @@
 <template>
-    <NuxtLayout name="protected">
+    <NuxtLayout layout="protected">
         <div class="p-2 flex flex-col place-items-center">
                 <em v-if="loading">loading profile details...</em>
                 <div v-else>

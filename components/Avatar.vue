@@ -1,6 +1,6 @@
 <template>
     <div class="avatar relative flex flex-col place-items-center">
-            <label class="mb-8 w-36 h-36 mask mask-hexagon shadow-lg bg-gray-200" for="single">
+            <label class="mb-8 w-36 h-36 mask mask-circle shadow-lg bg-gray-200" for="single">
                 <img :src="props.src" :alt="props.title" />
             </label>
             <input

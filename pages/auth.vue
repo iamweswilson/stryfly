@@ -1,17 +1,18 @@
 <template>
-    <div class="min-h-screen flex justify-center">
+    <div>
+        <div class="min-h-screen flex justify-center">
         <div class="cont mt-28">
-            <StarterKit/>
             <AuthForm @submit="onSubmit"/>
             <div class="w-full flex justify-center py-6">
                 <Spinner v-if="loading"/>
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script lang="ts" setup>
-    import Form from '~~/components/AuthForm.vue'
+    import AuthForm from '~~/components/AuthForm.vue'
 
     const { $supabase, $alert } = useNuxtApp()
     const router = useRouter()
@@ -34,7 +35,7 @@
         } catch(err) {}
     }
 </script>
-<style lang="postcss">
+<style>
     .cont {
         @apply w-full sm:w-3/4 md:w-8/12 lg:w-6/12 xl:w-4/12
     }
