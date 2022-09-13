@@ -13,7 +13,7 @@
                             <button class="text-gray-500 text-sm my-1" @click="isModalOpened = true">(update profile)</button>
                     </div>
                 </div>
-                <Dialog
+                <!--<Dialog
                     v-if="isModalOpened"
                     :isOpen="isModalOpened"
                     title="Update Profile"
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                </Dialog>
+                </Dialog>-->
         </div>
     </div>
 </template>

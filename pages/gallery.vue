@@ -43,7 +43,7 @@
             <Button variant="primary" @click="$alert({ text: 'Default message goes here...', type: 'default'})">Default</Button>
       </ComponentExample>
       <Sep/>
-      <ComponentExample heading="dialog/modal">
+      <!-- <ComponentExample heading="dialog/modal">
             <Dialog
                 v-if="isOpen"
                 :isOpen="isOpen"
@@ -58,7 +58,7 @@
                 </p>
             </Dialog>
             <button @click="isOpen = true">Show dialog</button>
-      </ComponentExample>
+      </ComponentExample> -->
       <ComponentExample heading="pagenav">
         <PageNavIndicator />
         see at the top...
@@ -69,7 +69,7 @@
 <script lang="ts" setup>
     import Spinner from '~/components/Spinner.vue'
     import PageNavIndicator from '~/components/PageNavIndicator.vue'
-    import Dialog from '~/components/Dialog.vue'
+//     import Dialog from '~/components/Dialog.vue'
     const { $alert } = useNuxtApp()
 
     const isOpen = ref<boolean>(false)
