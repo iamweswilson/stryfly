@@ -6,3 +6,7 @@ nuxt.d.ts
 
 .env
 .env.local
+.dist
+
+# Local Netlify folder
+.netlify
