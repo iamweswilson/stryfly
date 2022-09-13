@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   alias: {
     '~/*': './*',
   },
-  target: 'static',
+  target: 'ssr',
   modules: [
     [
       'unplugin-icons/nuxt',
