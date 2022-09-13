@@ -4,8 +4,8 @@ import './assets/css/tailwind.css'
 </script>
 
 <template>
-  <div class="antialiased">
+  <NuxtLayout class="antialiased">
     <AlertList />
     <NuxtPage />
-  </div>
+  </NuxtLayout>
 </template>

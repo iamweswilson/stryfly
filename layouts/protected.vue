@@ -47,9 +47,3 @@
         if(subscription.value) subscription.value?.data?.unsubscribe()
     })
 </script>
-
-<style>
-    .header {
-        @apply w-screen bg-black
-    }
-</style>

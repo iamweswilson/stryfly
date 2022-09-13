@@ -1,5 +1,5 @@
 <template>
-    <NuxtLayout layout="protected">
+    <div>
         <div class="p-2 flex flex-col place-items-center">
                 <em v-if="loading">loading profile details...</em>
                 <div v-else>
@@ -41,9 +41,12 @@
                     </div>
                 </Dialog>
         </div>
-    </NuxtLayout>
+    </div>
 </template>
 <script lang="ts" setup>
+    definePageMeta({
+        layout: "protected",
+    });
     // profile attrs
     type ProfileAttrs = {
         username?: string,

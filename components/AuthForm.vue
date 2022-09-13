@@ -2,9 +2,9 @@
     <form @submit.prevent="submit">
         <fieldset>
             <legend>{{ currActionLabel }}</legend>
-            <button v-if="useGithubAuth" class="flex-1 bg-gray-200 text-black py-3 rounded w-full text-center" @click="$supabase.auth.signIn({ provider: 'github'})">
+            <!--<button v-if="useGithubAuth" class="flex-1 bg-gray-200 text-black py-3 rounded w-full text-center" @click="$supabase.auth.signIn({ provider: 'github'})">
                 {{ currActionLabel }} with <strong>Github</strong>
-            </button>
+            </button>-->
             <Sep v-if="useGithubAuth" />
             <div class="field">
                 <label for="email">Email</label>

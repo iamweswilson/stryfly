@@ -1,7 +1,13 @@
 <template>
-  <NuxtLayout>
+  <div>
     <div class="min-h-screen flex flex-col justify-center">
       Index
     </div>
-  </NuxtLayout>
+  </div>
 </template>
+
+<script lang="ts" setup>
+  definePageMeta({
+      layout: "protected",
+  });
+  </script>
