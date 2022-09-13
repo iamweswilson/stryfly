@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     ],
   },
   target: 'static',
-  ssr: 'false',
+  ssr: false,
   alias: {
     '~/*': './*',
   },
