@@ -1,14 +1,14 @@
 <template>
     <div class="avatar relative flex flex-col place-items-center">
-            <label class="mb-8 w-36 h-36 mask mask-circle shadow-lg bg-gray-200" for="single">
+            <label class="mb-8 w-full h-full mask mask-circle shadow-lg bg-gray-200" for="single">
                 <img :src="props.src" :alt="props.title" />
             </label>
             <input
                 class="sr-only"
                 type="file"
-                id="single"
                 accept="image/*"
                 @change="$emit('change', $event)"
+                id="single"
                 :disabled="props.loading"
             />
     </div>

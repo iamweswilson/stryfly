@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-2 flex flex-col place-items-center">
+        <aside class="p-2 flex flex-col place-items-center">
                 <em v-if="loading">loading profile details...</em>
                 <div v-else>
                     <div class="mt-2 text-center">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </Dialog>
-        </div>
+        </aside>
     </div>
 </template>
 <script lang="ts" setup>
