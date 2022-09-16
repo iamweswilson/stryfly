@@ -4,12 +4,26 @@
             <a href="/" class="mr-auto flex-none font-bold">
                 stryfly
             </a>
-            <ul class="list-none flex gap-4 text-left">
+            <ul class="list-none flex gap-6 text-left items-center">
                 <li>
-                    <img :src="profile?.avatar_url" :title="profile?.username" class="w-8 h-8 rounded-full"/>
+                    <a href="#">Nav Item</a>
                 </li>
-                <li>
-                    <button v-if="props.user" @click="$emit('signOut')">(Sign Out)</button>
+                <li v-if="props.user" class="self-center">
+                    <span class="dropdown">
+                        <div class="dropdown-trigger">
+                            <button aria-haspopup="true" aria-controls="dropdown-menu" @click.prevent="toggle">
+                                <span class="sr-only">Open menu</span>
+                                <img :src="profile?.avatar_url" :title="profile?.username" class="w-8 h-8 rounded-full"/>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu hidden" :class="{'is-active': open}">
+                            <div class="absolute right-0 z-10 w-44 bg-white rounded shadow dark:bg-gray-700 dark:divide-gray-600 py-3 text-sm text-gray-900 dark:text-white">
+                                <div class="pb-2 px-4 border-b">{{ profile?.username }}</div>
+                                <router-link to="/profile" class="dropdown-item block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
+                                <a @click="$emit('signOut')" href="#" class="block pt-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                            </div>
+                        </div>
+                    </span>
                 </li>
                 <NuxtLink v-if="!props.user" class="justify-self-end" to="/auth">Log in</NuxtLink>
             </ul>
@@ -34,8 +48,8 @@
 
     const emit = defineEmits<NavEvts>()
 
-// profile attrs
-type ProfileAttrs = {
+    // profile attrs
+    type ProfileAttrs = {
         username?: string,
         avatar_url?:string,
     }
@@ -87,3 +101,39 @@ type ProfileAttrs = {
     onMounted(getProfile)
 
 </script>
+
+<script lang="ts">
+    export default {
+      data() {
+        return {
+          open: false
+        };
+      },
+
+      created() {
+        window.addEventListener("click", this.close);
+      },
+
+      beforeDestroy() {
+        window.removeEventListener("click", this.close);
+      },
+
+      methods: {
+        toggle() {
+          this.open = !this.open;
+        },
+
+        close(e) {
+          if (!this.$el.contains(e.target)) {
+            this.open = false;
+          }
+        }
+      }
+    };
+</script>
+
+<style>
+    .is-active {
+        display: block;
+    }
+</style>
