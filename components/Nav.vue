@@ -6,9 +6,9 @@
             </a>
             <ul class="list-none flex gap-6 text-left items-center">
                 <li>
-                    <a href="#">Nav Item</a>
+                    <router-link to="/about">About</router-link>
                 </li>
-                <li v-if="props.user" class="self-center">
+                <li v-if="props.user" class="self-center" ref="dropdownMenu">
                     <span class="dropdown">
                         <div class="dropdown-trigger">
                             <button aria-haspopup="true" aria-controls="dropdown-menu" @click.prevent="toggle">
@@ -76,26 +76,16 @@
 
     async function getProfile() {
         try {
-            loading.value = true
             let { data: { username, avatar_url } , error } = await getCurrentUserProfile()
-            if (error) {
-                $alert({ type: 'default', text: 'First login? You wanna update your profile details? 🙂' })
-            }
             avatar_url = await getAvatar(avatar_url)
             // update
             profile.username = username
             profile.avatar_url = avatar_url
-        } catch (error: any) {
-            if(error instanceof TypeError) {
-                $alert({ type: 'default', text: 'First login? You wanna update your profile details? 🙂' })
-            } else if(error.message === 'The resource was not found') {
-                $alert({ type: 'default', text: 'You know? You can click on the randomly generated avatar to update your profile picture.' })
-            } else {
-                $alert({ type: 'error', text: error.message })
-            }
-        } finally {
             loading.value = false
-        }
+            if(error) {
+                return $alert({ type: 'error', text: error.message })
+            }
+        } catch(error) {}
     }
 
     onMounted(getProfile)
@@ -128,8 +118,15 @@
             this.open = false;
           }
         }
-      }
-    };
+      },
+
+      watch: {
+        '$route' () {
+        // close the dropdown on new view
+        this.open = false
+        }
+    }
+    }
 </script>
 
 <style>
