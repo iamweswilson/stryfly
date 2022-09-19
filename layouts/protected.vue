@@ -3,7 +3,7 @@
         <div class="header">
             <Nav :user="user" @signOut="handleSignOut" />
         </div>
-        <div class="container mx-auto">
+        <div class="container mx-auto p-2">
             <slot />
         </div>
     </div>

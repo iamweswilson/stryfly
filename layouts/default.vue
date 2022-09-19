@@ -4,7 +4,7 @@
             <Nav :user="user" />
         </div>
         <main>
-            <div class="container mx-auto">
+            <div class="container mx-auto p-2">
                 <slot />
             </div>
         </main>
