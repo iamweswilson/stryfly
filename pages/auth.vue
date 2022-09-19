@@ -13,7 +13,9 @@
 
 <script lang="ts" setup>
     import AuthForm from '~~/components/AuthForm.vue'
+    import type { User, Subscription } from '@supabase/supabase-js'
 
+    const user = ref<User|null>(null)
     const { $supabase, $alert } = useNuxtApp()
     const router = useRouter()
     const loading = ref<boolean>(false)
@@ -27,13 +29,19 @@
                 return $alert({ type: 'error', text: error.message })
             }
             if(isSignIn) {
-                $alert({ type: 'success', text: 'Logging you in shortly....' })
+                $alert({ type: 'success', text: 'Logging you in...' })
                 return router.push('/profile')
             } else {
                 return $alert({ type: 'success', text: 'Please check your inbox to activate your account!' })
             }
         } catch(err) {}
     }
+    onMounted(() => {
+        user.value = $supabase.auth.user()
+        if(user.value) {
+            router.replace('/')
+        }
+    })
 </script>
 <style>
     .cont {
