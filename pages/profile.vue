@@ -8,8 +8,9 @@
                         {{avatarLoading ? 'Updating..' : ''}}
                     </div>
                     <div class="profile-detail my-4 flex flex-col place-items-center">
-                            <h2 class="text-4xl mb-1">Howdie, {{ profile?.username }}!</h2>
-                            <span class="inline-block px-2 py-1 bg-gray-400 text-white rounded-full">{{ profile?.website }}</span>
+                            <h2 v-if="profile?.username" class="text-4xl mb-1">Howdie, {{ profile?.username }}!</h2>
+                            <span v-if="profile?.website" class="inline-block px-2 py-1 bg-gray-400 text-white rounded-full">{{ profile?.website }}</span>
+                            <span class="inline-block text-white">{{ profile?.bio }}</span>
                             <button class="text-gray-500 text-sm my-1" @click="isModalOpened = true">(update profile)</button>
                     </div>
                 </div>
@@ -37,6 +38,12 @@
                                 </label>
                                 <input type="text" name="website" class="input input-bordered" placeholder="Your website" minlength={6} :value="fields.website"  @input="handleChange" />
                             </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Bio</span>
+                                </label>
+                                <input type="text" name="bio" class="input input-bordered" placeholder="Your bio" minlength={6} :value="fields.bio"  @input="handleChange" />
+                            </div>
                         </div>
                     </div>
                 </Dialog>
@@ -51,12 +58,14 @@
     type ProfileAttrs = {
         username?: string,
         website?: string,
+        bio?: string,
         avatar_url?:string,
     }
-    const GET_COL_SET = `username, website, avatar_url`
+    const GET_COL_SET = `username, website, bio, avatar_url`
     const PROFILE_INITIAL_STATE: ProfileAttrs = {
         username: '',
         website: '',
+        bio: '',
         avatar_url: ''
     }
 
@@ -90,7 +99,7 @@
     const isProfileUpdating = ref<boolean>(false)
     const isModalOpened = ref<boolean>(false)
     const profile = reactive<ProfileAttrs>(PROFILE_INITIAL_STATE)
-    const fields = reactive<Omit<ProfileAttrs, 'avatar_url'>>({ username: '', website: ''})
+    const fields = reactive<Omit<ProfileAttrs, 'avatar_url'>>({ username: '', website: '', bio: ''})
         // @ts-ignore
     const handleChange = (e: Event) => fields[e.currentTarget.name] = e.currentTarget.value
     const handleConfirm = () => {
@@ -121,7 +130,7 @@
     async function getProfile() {
         try {
             loading.value = true
-            let { data: { username, website, avatar_url } , error } = await getCurrentUserProfile()
+            let { data: { username, website, bio, avatar_url } , error } = await getCurrentUserProfile()
             if (error) {
                 $alert({ type: 'default', text: 'First login? You wanna update your profile details? 🙂' })
             }
@@ -129,10 +138,12 @@
             // update
             profile.username = username
             profile.website = website
+            profile.bio = bio
             profile.avatar_url = avatar_url
 
             fields.username = username
             fields.website = website
+            fields.bio = bio
         } catch (error: any) {
             if(error instanceof TypeError) {
                 $alert({ type: 'default', text: 'First login? You wanna update your profile details? 🙂' })
@@ -146,15 +157,16 @@
         }
     }
 
-    async function updProfile({ username, website }: Omit<ProfileAttrs, 'avatar_url'>) {
+    async function updProfile({ username, website, bio }: Omit<ProfileAttrs, 'avatar_url'>) {
         try {
             isProfileUpdating.value = true
-            let { data: [ updates ], error: updateError } = await updateCurrentUserProfile({ username, website })
+            let { data: [ updates ], error: updateError } = await updateCurrentUserProfile({ username, website, bio })
             if (updateError) {
                 throw updateError
             }
             profile.username = updates.username
             profile.website = updates.website
+            profile.bio = updates.bio
         } catch (error: any) {
             $alert({ type: 'error', text: error.message })
         } finally {
