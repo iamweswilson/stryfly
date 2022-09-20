@@ -9,9 +9,8 @@
                             {{avatarLoading ? 'Updating..' : ''}}
                         </section>
                         <section class="justify-self-end">
-                            <button class="border border-white py-2 px-4 text-white rounded-full hover:bg-blue-600 hover:border-blue-500" @click="isModalOpened = true">Edit profile</button>
+                            <button class="btn btn-primary" @click="isModalOpened = true">Edit profile</button>
                         </section>
-                        <!--<Avatar :src="profile?.avatar_url" :title="profile?.username" :loading="avatarLoading" @change="updAvatar" /> -->
                     </div>
                     <div class="profile-detail my-4 flex flex-col place-items-start">
                         <h2 v-if="profile?.username" class="text-4xl mb-4">{{ profile?.username }}</h2>

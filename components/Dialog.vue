@@ -10,7 +10,8 @@
                 <slot/>
                 <div class="modal-action">
                     <Button 
-                    class="inline-flex justify-center rounded-full bg-blue-500  border-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none"
+                    class="btn"
+                    variation="primary"
                     @click="$emit('confirm');" :disabled="acting">{{actionLbl}}</Button>
                     <button @click="$emit('cancel');setIsOpen(false)">Cancel</button>
                 </div>

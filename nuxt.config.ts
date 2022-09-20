@@ -25,8 +25,14 @@ export default defineNuxtConfig({
         defaultClass: 'w-7 h-7 inline-block',
       },
     ],
-    './modules/alert/module'
+    './modules/alert/module',
+    '@nuxtjs/color-mode'
   ],
+  colorMode: {
+    preference: 'system', // default theme
+    fallback: 'dark', // fallback value if not system preference found
+    dataValue: 'theme', // activate data-theme in <html> tag
+  },
   runtimeConfig: {
     supabaseUrl: process.env.SUPABASE_URL,
     supabaseKey: process.env.SUPABASE_KEY,
