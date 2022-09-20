@@ -45,6 +45,6 @@
 </script>
 <style>
     .cont {
-        @apply w-full sm:w-3/4 md:w-8/12 lg:w-6/12 xl:w-4/12
+        @apply w-10/12 sm:w-3/4 md:w-9/12 lg:w-7/12 xl:w-5/12 
     }
 </style>

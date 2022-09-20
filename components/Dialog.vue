@@ -9,7 +9,9 @@
                 </DialogDescription>
                 <slot/>
                 <div class="modal-action">
-                    <Button variant="primary" @click="$emit('confirm');" :disabled="acting">{{actionLbl}}</Button>
+                    <Button 
+                    class="inline-flex justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none"
+                    @click="$emit('confirm');" :disabled="acting">{{actionLbl}}</Button>
                     <button @click="$emit('cancel');setIsOpen(false)">Cancel</button>
                 </div>
             </div>

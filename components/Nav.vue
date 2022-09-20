@@ -138,7 +138,7 @@
         } catch(error) {}
     }
 
-    onUpdated(getProfile)
+    onMounted(getProfile)
 
 </script>
 

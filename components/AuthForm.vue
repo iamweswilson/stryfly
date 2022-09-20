@@ -12,10 +12,14 @@
             </div>
             <div class="field">
                 <label for="password">Password</label>
-                <input class="p-4 text-black" id="password" name="password" type="password" v-model="form.password" placeholder="Your password. Leave empty for password-less login" />
+                <input class="p-4 text-black" id="password" name="password" type="password" v-model="form.password" placeholder="Your password" />
             </div>
             <div class="field poles-apart">
-                <Button type="submit" variant="primary">{{currActionLabel}}</Button>
+                <Button type="submit"
+                    class="inline-flex justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none"
+                >
+                    {{currActionLabel}}
+                </Button>
 
                 <div class="text-right text-black">
                     <small class="block">{{ isSignIn ? `not a member?` : `already a member?` }}</small>
