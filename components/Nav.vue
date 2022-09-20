@@ -6,25 +6,74 @@
             </a>
             <ul class="list-none flex gap-6 text-left items-center">
                 <li>
+                    <router-link to="/">Home</router-link>
+                </li>
+                <li>
                     <router-link to="/about">About</router-link>
                 </li>
-                <li v-if="props.user" class="self-center" ref="dropdownMenu">
-                    <span class="dropdown">
-                        <div class="dropdown-trigger">
-                            <button aria-haspopup="true" aria-controls="dropdown-menu" @click.prevent="toggle">
-                                <span class="sr-only">Open menu</span>
-                                <img :src="profile?.avatar_url" :title="profile?.username" class="w-8 h-8 rounded-full"/>
-                            </button>
+                <Menu as="div" v-if="props.user" v-slot="{ open }" class="relative inline-block text-left">
+                <div>
+                    <MenuButton
+                    class="inline-flex w-full justify-center"
+                    >
+                        <span class="sr-only">Open menu</span>
+                        <img :src="profile?.avatar_url" :title="profile?.username" class="w-8 h-8 rounded-full"/>
+                    </MenuButton>
+                </div>
+
+                <transition
+                    enter-active-class="transition duration-100 ease-out"
+                    enter-from-class="transform scale-95 opacity-0"
+                    enter-to-class="transform scale-100 opacity-100"
+                    leave-active-class="transition duration-75 ease-in"
+                    leave-from-class="transform scale-100 opacity-100"
+                    leave-to-class="transform scale-95 opacity-0"
+                >
+                    <MenuItems
+                    v-show="open"
+                    class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    >
+                    <div class="px-1 py-1">
+                        <MenuItem v-slot="{ active }">
+                        <div
+                            :class="[
+                            'text-gray-900',
+                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                            ]"
+                        >
+                        {{ profile?.username }}
                         </div>
-                        <div class="dropdown-menu hidden" :class="{'is-active': open}">
-                            <div class="absolute right-0 z-10 w-44 bg-white rounded shadow dark:bg-gray-700 dark:divide-gray-600 py-3 text-sm text-gray-900 dark:text-white">
-                                <div class="pb-2 px-4 border-b">{{ profile?.username }}</div>
-                                <router-link to="/profile" class="dropdown-item block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</router-link>
-                                <a @click="$emit('signOut')" href="#" class="block pt-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                            </div>
-                        </div>
-                    </span>
-                </li>
+                        </MenuItem>
+                    </div>
+                    <div class="px-1 py-1">
+                        <MenuItem v-slot="{ active }">
+                        <router-link to="/profile"
+                            :class="[
+                            active ? 'bg-blue-500 text-white' : 'text-gray-900',
+                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                            ]"
+                        >
+                            Profile
+                        </router-link>
+                        </MenuItem>
+
+                    </div>
+                    <div class="px-1 py-1">
+                        <MenuItem v-slot="{ active }">
+                        <button
+                            @click="$emit('signOut')"
+                            :class="[
+                            active ? 'bg-blue-500 text-white' : 'text-gray-900',
+                            'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                            ]"
+                        >
+                            Sign Out
+                        </button>
+                        </MenuItem>
+                    </div>
+                    </MenuItems>
+                </transition>
+                </Menu>
                 <NuxtLink v-if="!props.user" class="justify-self-end" to="/auth">Log in</NuxtLink>
             </ul>
         </div>
@@ -33,6 +82,7 @@
 
 <script lang="ts" setup>
     import type { User } from '@supabase/supabase-js'
+    import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
     type NavProps = {
         user: User
