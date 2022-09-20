@@ -6,10 +6,10 @@
             </a>
             <ul class="list-none flex gap-6 text-left items-center">
                 <li>
-                    <router-link to="/">Home</router-link>
+                    <NuxtLink to="/">Home</NuxtLink>
                 </li>
                 <li>
-                    <router-link to="/about">About</router-link>
+                    <NuxtLink to="/about">About</NuxtLink>
                 </li>
                 <Menu as="div" v-if="props.user" v-slot="{ open }" class="relative inline-block text-left">
                 <div>
@@ -47,14 +47,14 @@
                     </div>
                     <div class="px-1 py-1">
                         <MenuItem v-slot="{ active }">
-                        <router-link to="/profile"
+                        <NuxtLink to="/profile"
                             :class="[
                             active ? 'bg-blue-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                             ]"
                         >
                             Profile
-                        </router-link>
+                        </NuxtLink>
                         </MenuItem>
 
                     </div>
@@ -143,40 +143,7 @@
 </script>
 
 <script lang="ts">
-    export default {
-      data() {
-        return {
-          open: false
-        };
-      },
 
-      created() {
-        window.addEventListener("click", this.close);
-      },
-
-      beforeDestroy() {
-        window.removeEventListener("click", this.close);
-      },
-
-      methods: {
-        toggle() {
-          this.open = !this.open;
-        },
-
-        close(e) {
-          if (!this.$el.contains(e.target)) {
-            this.open = false;
-          }
-        }
-      },
-
-      watch: {
-        '$route' () {
-        // close the dropdown on new view
-        this.open = false
-        }
-    }
-    }
 </script>
 
 <style>

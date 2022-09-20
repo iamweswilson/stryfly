@@ -8,7 +8,7 @@
             <Sep v-if="useGithubAuth" />
             <div class="field">
                 <label for="email">Email</label>
-                <input class="p-4 text-black" id="email" name="email" type="email" v-model="form.email" placeholder="your email" />
+                <input class="p-4 text-black" id="email" name="email" type="email" v-model="form.email" placeholder="Your email" />
             </div>
             <div class="field">
                 <label for="password">Password</label>
@@ -16,7 +16,7 @@
             </div>
             <div class="field poles-apart">
                 <Button type="submit"
-                    class="inline-flex justify-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none"
+                    class="inline-flex justify-center rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none"
                 >
                     {{currActionLabel}}
                 </Button>
