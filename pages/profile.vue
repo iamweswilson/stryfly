@@ -1,18 +1,29 @@
 <template>
-    <div>
-        <aside class="p-2 flex flex-col place-items-center">
+    <div class="w-full">
+        <section class="mt-12 p-2 flex flex-col">
                 <em v-if="loading">loading profile details...</em>
-                <div v-else>
-                    <div class="mt-2 text-center">
-                        <button class="bg-white py-2 px-4 text-gray-700 rounded-full" @click="isModalOpened = true">Edit profile</button>
+                <div v-else class="w-full">
+                    <div class="mt-2 text-center flex justify-between items-start">
+                        <section class="justify-self-start">
+                            <img :src="profile?.avatar_url" :title="profile?.username" class="w-32 h-32 rounded-full"/>
+                            {{avatarLoading ? 'Updating..' : ''}}
+                        </section>
+                        <section class="justify-self-end">
+                            <button class="bg-white py-2 px-4 text-gray-700 rounded-full hover:bg-indigo-600 hover:text-white" @click="isModalOpened = true">Edit profile</button>
+                        </section>
                         <!--<Avatar :src="profile?.avatar_url" :title="profile?.username" :loading="avatarLoading" @change="updAvatar" /> -->
-                        <img :src="profile?.avatar_url" :title="profile?.username" class="w-32 h-32 rounded-full"/>
-                        {{avatarLoading ? 'Updating..' : ''}}
                     </div>
-                    <div class="profile-detail my-4 flex flex-col place-items-center">
-                            <h2 v-if="profile?.username" class="text-4xl mb-1">Howdie, {{ profile?.username }}!</h2>
-                            <a v-if="profile?.website" class="">{{ profile?.website }}</a>
-                            <span class="inline-block text-white">{{ profile?.bio }}</span>
+                    <div class="profile-detail my-4 flex flex-col place-items-start">
+                        <h2 v-if="profile?.username" class="text-4xl mb-4">Hi, {{ profile?.username }}!</h2>
+                        <span class="inline-block text-white">{{ profile?.bio }}</span>
+                    </div>
+                    <div class="mt-12 pt-6 border-t border-gray-400">
+                        <a v-if="profile?.website" :href="'//' + profile?.website" class="mb-8 flex gap-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                                </svg>
+                            {{ profile?.website }}
+                        </a>
                     </div>
                 </div>
                 <Dialog
@@ -48,7 +59,7 @@
                         </div>
                     </div>
                 </Dialog>
-        </aside>
+        </section>
     </div>
 </template>
 <script lang="ts" setup>

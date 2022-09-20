@@ -2,15 +2,15 @@
     <Dialog :open="isOpen" @close="setIsOpen">
         <div class="modal modal-open grid place-content-center">
             <DialogOverlay />
-            <div class="modal-box w-full">
+            <div class="modal-box w-screen">
                 <DialogTitle class="text-2xl font-semibold text-white">{{title}}</DialogTitle>
                 <DialogDescription v-if="desc">
                     {{desc}}
                 </DialogDescription>
                 <slot/>
                 <div class="modal-action">
-                    <button class="btn btn-primary" @click="$emit('confirm');" :disabled="acting">{{actionLbl}}</button>
-                    <button class="btn" @click="$emit('cancel');setIsOpen(false)">Cancel</button>
+                    <Button variant="primary" @click="$emit('confirm');" :disabled="acting">{{actionLbl}}</Button>
+                    <button @click="$emit('cancel');setIsOpen(false)">Cancel</button>
                 </div>
             </div>
         </div>
