@@ -4,30 +4,31 @@
                 <em v-if="loading">loading profile details...</em>
                 <div v-else>
                     <div class="mt-2 text-center">
-                        <Avatar :src="profile?.avatar_url" :title="profile?.username" :loading="avatarLoading" @change="updAvatar" />
+                        <button class="bg-white py-2 px-4 text-gray-700 rounded-full" @click="isModalOpened = true">Edit profile</button>
+                        <!--<Avatar :src="profile?.avatar_url" :title="profile?.username" :loading="avatarLoading" @change="updAvatar" /> -->
+                        <img :src="profile?.avatar_url" :title="profile?.username" class="w-32 h-32 rounded-full"/>
                         {{avatarLoading ? 'Updating..' : ''}}
                     </div>
                     <div class="profile-detail my-4 flex flex-col place-items-center">
                             <h2 v-if="profile?.username" class="text-4xl mb-1">Howdie, {{ profile?.username }}!</h2>
-                            <span v-if="profile?.website" class="inline-block px-2 py-1 bg-gray-400 text-white rounded-full">{{ profile?.website }}</span>
+                            <a v-if="profile?.website" class="">{{ profile?.website }}</a>
                             <span class="inline-block text-white">{{ profile?.bio }}</span>
-                            <button class="text-gray-500 text-sm my-1" @click="isModalOpened = true">(update profile)</button>
                     </div>
                 </div>
                 <Dialog
                     v-if="isModalOpened"
                     :isOpen="isModalOpened"
                     title="Update Profile"
-                    desc="Please update the details and save"
                     actionLbl="Update Profile"
                     :acting="isProfileUpdating"
                     @confirm="handleConfirm"
                     @cancel="isModalOpened = false"
                 >
-                    <div class="form">
+                    <div class="form mt-6">
                         <div className="form-controls">
+                            <Avatar class="w-32" :src="profile?.avatar_url" :title="profile?.username" :loading="avatarLoading" @change="updAvatar" />
                             <div class="form-control">
-                                <label class="label">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
                                     <span class="label-text">Username</span>
                                 </label>
                                 <input type="text" name="username" class="input input-bordered" required placeholder="Your username" minlength={3} :value="fields.username" @input="handleChange" />
@@ -42,7 +43,7 @@
                                 <label class="label">
                                     <span class="label-text">Bio</span>
                                 </label>
-                                <input type="text" name="bio" class="input input-bordered" placeholder="Your bio" minlength={6} :value="fields.bio"  @input="handleChange" />
+                                <textarea type="text" name="bio" class="input input-bordered h-24" rows="4" placeholder="Your bio" minlength={6} :value="fields.bio"  @input="handleChange"></textarea>
                             </div>
                         </div>
                     </div>

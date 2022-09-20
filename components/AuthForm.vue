@@ -89,8 +89,8 @@
     label {
         @apply block uppercase font-semibold text-gray-600 text-base
     }
-    input {
-        @apply w-full font-normal border p-4 text-black focus:border-indigo-500 rounded-md focus:outline-none
+    input, textarea {
+        @apply w-full font-normal border p-4 text-black focus:border-blue-500 rounded-md focus:outline-none
     }
     .poles-apart {
         @apply flex justify-between items-center
