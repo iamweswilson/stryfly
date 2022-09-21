@@ -175,10 +175,6 @@
             fields.bio = bio
         } catch (error: any) {
             if(error instanceof TypeError) {
-                $alert({ type: 'default', text: 'First login? You wanna update your profile details? 🙂' })
-            } else if(error.message === 'The resource was not found') {
-                $alert({ type: 'default', text: 'You know? You can click on the randomly generated avatar to update your profile picture.' })
-            } else {
                 $alert({ type: 'error', text: error.message })
             }
         } finally {
